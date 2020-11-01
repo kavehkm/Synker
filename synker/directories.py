@@ -9,11 +9,11 @@ from synker.files import File, LocalFile
 
 class LocalDirectory(object):
     """Local Directory"""
-    def __init__(self, path, pattern='.*'):
+    def __init__(self, path, pattern):
         self.path = path
         self._pattern = pattern
 
-    def get_files(self, mtime=0.0):
+    def get_files(self, mtime):
         dirs, files = [self.path], []
         while dirs:
             entries = os.scandir(dirs.pop())

@@ -1,4 +1,3 @@
-# provider exceptions
 class EXXX(Exception):
     """Base Exception"""
     def __init__(self, message=''):
@@ -9,6 +8,7 @@ class EXXX(Exception):
         return self.message
 
 
+# provider exceptions
 class E000(EXXX):
     """000: Connection Error"""
     pass

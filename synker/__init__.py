@@ -18,13 +18,8 @@ class Synker(object):
             raise EXXX('cloud is not set')
         return self._cloud_directory
 
-    @cloud_directory.setter
-    def cloud_directory(self, cs):
+    def set_cloud(self, cloud_path, cloud_limit, mtime_file, token):
         error = ''
-        cloud_path = cs.get('cloud_path')
-        cloud_limit = cs.get('cloud_limit')
-        mtime_file = cs.get('mtime_file')
-        token = cs.get('token')
         # validation
         if not cloud_path:
             error = 'invalid cloud path'
@@ -47,11 +42,8 @@ class Synker(object):
             raise EXXX('local directory is not set')
         return self._local_directory
 
-    @local_directory.setter
-    def local_directory(self, ls):
+    def set_local(self, directory_path, pattern):
         error = ''
-        directory_path = ls.get('directory_path')
-        pattern = ls.get('pattern')
         # validation
         if not pattern:
             error = 'invalid pattern'

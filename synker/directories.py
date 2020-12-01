@@ -88,5 +88,8 @@ class CloudDirectory(object):
             self.files.append(File(**res, root=self.path))
 
     def delete(self, cloud_file):
-        self._provider.delete(cloud_file.full_path)
+        try:
+            self._provider.delete(cloud_file.full_path)
+        except E409:
+            pass
         self.files.remove(cloud_file)

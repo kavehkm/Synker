@@ -1,5 +1,4 @@
 # standard
-import json
 from datetime import datetime
 # internal
 from synker import exceptions as se
@@ -37,22 +36,23 @@ class DropboxProvider(object):
         try:
             r = post(**p)
         except RequestException:
-            raise se.E000('connection error')
+            raise se.E000
         else:
-            if r.status_code == 200:
+            sc = r.status_code
+            if sc == 200:
                 return r
-            elif r.status_code == 400:
-                raise se.E400(r.text)
-            elif r.status_code == 401:
-                raise se.E401(r.text)
-            elif r.status_code == 403:
-                raise se.E403(r.text)
-            elif r.status_code == 409:
-                raise se.E409(r.text)
-            elif r.status_code == 429:
-                raise se.E429(r.text)
+            elif sc == 400:
+                raise se.E400(details=r.text)
+            elif sc == 401:
+                raise se.E401(details=r.text)
+            elif sc == 403:
+                raise se.E403(details=r.text)
+            elif sc == 409:
+                raise se.E409(details=r.text)
+            elif sc == 429:
+                raise se.E429(details=r.text)
             else:
-                raise se.E5XX(r.text)
+                raise se.E5XX(details=r.text)
 
     def set_token(self, t):
         p = {

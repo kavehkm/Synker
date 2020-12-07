@@ -15,20 +15,20 @@ class Synker(object):
     @property
     def cloud_directory(self):
         if self._cloud_directory is None:
-            raise EXXX('cloud is not set')
+            raise EXXX('ابر تنظیم نشده است')
         return self._cloud_directory
 
     def set_cloud(self, cloud_path, cloud_limit, mtime_file, token):
         error = ''
         # validation
         if not cloud_path:
-            error = 'invalid cloud path'
+            error = 'مسیر ابر اشتباه است'
         elif not cloud_limit or not isinstance(cloud_limit, int):
-            error = 'invalid cloud limit'
+            error = 'محدودیت حجم باید مقداری عددی و صحیح باشد'
         elif not mtime_file:
-            error = 'invalid mtime file'
+            error = 'فایل مهر زمانی معتبر نیست'
         elif not token:
-            error = 'invalid token'
+            error = 'توکن معتبر نیست'
         if error:
             raise EXXX(error)
         dp = DropboxProvider()
@@ -39,16 +39,16 @@ class Synker(object):
     @property
     def local_directory(self):
         if self._local_directory is None:
-            raise EXXX('local directory is not set')
+            raise EXXX('مسیر بکاپ تنظیم نشده است')
         return self._local_directory
 
     def set_local(self, directory_path, pattern):
         error = ''
         # validation
         if not pattern:
-            error = 'invalid pattern'
+            error = 'الگوی بکاپ اشتباه است'
         elif not os.access(directory_path, 7):
-            error = 'access denied for directory: {}'.format(directory_path)
+            error = 'مسیر بکاپ اشتباه است یا دسترسی به آن امکان پذیر نیست: {}'.format(directory_path)
         if error:
             raise EXXX(error)
         ld = LocalDirectory(directory_path, pattern)
